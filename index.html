@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda del Opositor - Enfoque Claro y Adaptativo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter para máxima legibilidad y limpieza visual -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome para Iconografía descriptiva -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Eliminar scrollbars de distracción visual */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f4f4f5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4d4d8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a1a1aa;
+        }
+        /* Clases de apoyo sensorial */
+        .sensory-high-contrast {
+            color: #000000 !important;
+            background-color: #ffffff !important;
+        }
+        .sensory-text-lg p, .sensory-text-lg span, .sensory-text-lg li, .sensory-text-lg td {
+            font-size: 1.05rem !important;
+            line-height: 1.7 !important;
+        }
+        .sensory-text-lg h1, .sensory-text-lg h2, .sensory-text-lg h3, .sensory-text-lg h4 {
+            font-size: 1.4rem !important;
+        }
+    </style>
+</head>
+<body id="app-body" class="bg-zinc-50 text-zinc-800 min-h-screen flex flex-col md:flex-row transition-all duration-150">
+
+    <!-- Sidebar de Navegación Estructurada -->
+    <aside class="w-full md:w-64 bg-white border-b md:border-b-0 md:border-r border-zinc-200 flex flex-col justify-between shrink-0">
+        <div class="p-5">
+            <!-- Logotipo y Datos de Meta Directos -->
+            <div class="mb-6">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="h-8 w-8 rounded bg-zinc-800 flex items-center justify-center text-white">
+                        <i class="fa-solid fa-graduation-cap text-sm"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-sm tracking-tight text-zinc-900">OPOS-IA</h1>
+                        <p class="text-[10px] text-zinc-500 font-semibold tracking-wider">PREPARACIÓN C2 AGE</p>
+                    </div>
+                </div>
+                <div class="text-[11px] text-zinc-600 bg-zinc-100 p-2 rounded border border-zinc-200/60 mt-2">
+                    <span class="font-bold block">Meta:</span> Inserción laboral inmediata.
+                </div>
+            </div>
+
+            <!-- Navegación Predecible y sin adornos distractores -->
+            <nav class="space-y-1" aria-label="Navegación del opositor">
+                <button onclick="switchTab('dashboard')" id="btn-dashboard" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-semibold transition-colors bg-zinc-100 text-zinc-900 border border-zinc-200">
+                    <i class="fa-solid fa-chart-simple text-zinc-500 w-4"></i> Panel General
+                </button>
+                <button onclick="switchTab('cronograma')" id="btn-cronograma" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-semibold transition-colors text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50">
+                    <i class="fa-solid fa-calendar text-zinc-500 w-4"></i> Cronograma Semanal
+                </button>
+                <button onclick="switchTab('temario')" id="btn-temario" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-semibold transition-colors text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50">
+                    <i class="fa-solid fa-book text-zinc-500 w-4"></i> Temario Oficial
+                </button>
+                <button onclick="switchTab('cronometro')" id="btn-cronometro" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-semibold transition-colors text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50">
+                    <i class="fa-solid fa-clock text-zinc-500 w-4"></i> Simulador y Test IA
+                </button>
+                <button onclick="switchTab('directorio')" id="btn-directorio" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-semibold transition-colors text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50">
+                    <i class="fa-solid fa-robot text-zinc-500 w-4"></i> Buscador de Plazas IA
+                </button>
+            </nav>
+        </div>
+
+        <!-- Panel de Ajustes Sensoriales y Preferencias del Usuario -->
+        <div class="p-4 border-t border-zinc-200 bg-zinc-50/50 space-y-3">
+            <div>
+                <span class="text-[9px] font-bold text-zinc-400 uppercase tracking-wider block mb-1.5">Ajustes Sensoriales</span>
+                <div class="space-y-1.5">
+                    <!-- Audio Mute -->
+                    <label class="flex items-center justify-between text-[11px] text-zinc-600 cursor-pointer">
+                        <span>Silenciar tonos del sistema</span>
+                        <input type="checkbox" id="sensory-sound-mute" onchange="toggleSensorySound()" class="rounded border-zinc-300 text-zinc-800 focus:ring-zinc-500">
+                    </label>
+                    <!-- Focus Mode -->
+                    <label class="flex items-center justify-between text-[11px] text-zinc-600 cursor-pointer">
+                        <span>Modo Enfoque Máximo</span>
+                        <input type="checkbox" id="sensory-focus-mode" onchange="toggleFocusMode()" class="rounded border-zinc-300 text-zinc-800 focus:ring-zinc-500">
+                    </label>
+                    <!-- Large Text -->
+                    <label class="flex items-center justify-between text-[11px] text-zinc-600 cursor-pointer">
+                        <span>Aumentar tamaño de texto</span>
+                        <input type="checkbox" id="sensory-large-text" onchange="toggleLargeText()" class="rounded border-zinc-300 text-zinc-800 focus:ring-zinc-500">
+                    </label>
+                </div>
+            </div>
+
+            <!-- Entrada de Clave API Local -->
+            <div class="pt-2 border-t border-zinc-200">
+                <label class="text-[9px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">Clave API Gemini (Opcional)</label>
+                <div class="flex gap-1">
+                    <input type="password" id="api-key-input" placeholder="Por defecto: Integrada" class="w-full bg-white border border-zinc-300 rounded px-1.5 py-1 text-[10px] text-zinc-700 focus:outline-none focus:border-zinc-500">
+                    <button onclick="saveApiKey()" class="bg-zinc-800 hover:bg-zinc-900 text-white text-[10px] font-bold px-2 rounded transition-colors">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Espacio Principal de Trabajo -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto max-w-5xl mx-auto w-full">
+
+        <!-- Cabecera de Estado Calma y Limpia -->
+        <header class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 pb-4 border-b border-zinc-200">
+            <div>
+                <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-wider bg-zinc-200/60 px-2 py-0.5 rounded">PLAN ACTIVO</span>
+                <h2 class="text-xl font-bold text-zinc-900 mt-1">Agenda Diaria del Opositor</h2>
+                <p class="text-zinc-500 text-xs mt-0.5">Control estructurado de objetivos para el cuerpo Auxiliar (C2 AGE).</p>
+            </div>
+            
+            <!-- Indicador Estático de Control de Viernes -->
+            <div class="bg-white border border-zinc-200 rounded-lg p-3 flex items-center gap-3 text-xs">
+                <div>
+                    <span class="text-[9px] font-bold text-zinc-400 uppercase block">Monitoreo Semanal</span>
+                    <label class="flex items-center gap-2 mt-1 cursor-pointer">
+                        <input type="checkbox" id="check-viernes" onchange="toggleViernes()" class="rounded border-zinc-300 text-zinc-800 focus:ring-zinc-500">
+                        <span class="font-medium text-zinc-700">¿Es viernes de control hoy?</span>
+                    </label>
+                </div>
+                <div id="indicador-viernes" class="h-3 w-3 rounded-full bg-zinc-300"></div>
+            </div>
+        </header>
+
+        <!-- Mensajes y Alertas Informativas del Sistema -->
+        <div id="custom-alert-box" class="hidden mb-6 p-4 rounded-lg border text-xs flex items-center justify-between transition-all">
+            <div class="flex items-center gap-3">
+                <span id="custom-alert-icon" class="text-base"></span>
+                <div>
+                    <h5 id="custom-alert-title" class="font-bold uppercase tracking-wide"></h5>
+                    <p id="custom-alert-message" class="text-zinc-600 mt-0.5"></p>
+                </div>
+            </div>
+            <button onclick="closeCustomAlert()" class="text-zinc-400 hover:text-zinc-600 text-xs px-2"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- Secciones de Contenido Dinámico -->
+        <div class="space-y-6">
+
+            <!-- TAB 1: PANEL GENERAL (DASHBOARD) -->
+            <section id="tab-dashboard" class="space-y-6">
+                <!-- Tarjetas de Progreso Directas -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Progreso -->
+                    <div class="bg-white border border-zinc-200 rounded-lg p-4 shadow-sm">
+                        <h3 class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Progreso Global</h3>
+                        <div class="flex items-baseline gap-1 mt-2">
+                            <span id="stat-progreso" class="text-2xl font-bold text-zinc-950">0.0%</span>
+                            <span class="text-[10px] text-zinc-500">de 198h</span>
+                        </div>
+                        <div class="w-full bg-zinc-100 h-1.5 rounded-full mt-3 overflow-hidden">
+                            <div id="stat-progreso-bar" class="bg-zinc-800 h-1.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Horas -->
+                    <div class="bg-white border border-zinc-200 rounded-lg p-4 shadow-sm">
+                        <h3 class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Horas Completadas</h3>
+                        <div class="flex items-baseline gap-1 mt-2">
+                            <span id="stat-horas-reales" class="text-2xl font-bold text-zinc-950">0</span>
+                            <span class="text-[10px] text-zinc-500">horas reales</span>
+                        </div>
+                        <p class="text-[10px] text-zinc-500 mt-3" id="stat-horas-restantes">198 horas estimadas pendientes</p>
+                    </div>
+
+                    <!-- Fase Activa -->
+                    <div class="bg-white border border-zinc-200 rounded-lg p-4 shadow-sm">
+                        <h3 class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Fase Actual</h3>
+                        <div class="mt-2">
+                            <span id="stat-fase-nombre" class="text-xs font-bold text-zinc-800 block truncate">Cargando fase...</span>
+                            <span id="stat-semana-nombre" class="text-[10px] text-zinc-500 mt-1 block font-medium">Semana 1 de 13</span>
+                        </div>
+                    </div>
+
+                    <!-- Alertas del viernes -->
+                    <div class="bg-white border border-zinc-200 rounded-lg p-4 shadow-sm">
+                        <h3 class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Alertas y Ritmo</h3>
+                        <div class="flex items-center gap-2 mt-2">
+                            <div id="stat-alert-icon" class="h-6 w-6 rounded bg-zinc-100 flex items-center justify-center text-zinc-500 text-xs">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div>
+                                <span id="stat-alert-title" class="text-xs font-bold text-zinc-800">Plan al Día</span>
+                                <p id="stat-alert-desc" class="text-[9px] text-zinc-500">Todo en orden.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloque de Consejo del Mentor IA - Desactivable en Modo Enfoque -->
+                <div id="sensory-advisement-banner" class="bg-white border border-zinc-200 rounded-lg p-5">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-zinc-600 text-sm"><i class="fa-solid fa-lightbulb"></i></span>
+                            <h4 class="text-xs font-bold text-zinc-800">Orientación Estratégica del Tutor IA</h4>
+                        </div>
+                        <button onclick="generateAITip()" id="btn-generate-tip" class="bg-zinc-800 hover:bg-zinc-900 text-white font-bold text-[10px] px-3 py-1.5 rounded transition-all">
+                            Generar Recomendación del Día
+                        </button>
+                    </div>
+                    <div id="ai-tip-content" class="bg-zinc-50 p-3 rounded text-xs text-zinc-600 italic leading-relaxed border border-zinc-200">
+                        Pulsa en "Generar Recomendación del Día" para recibir un truco de memorización específico basado en tu semana activa del plan de estudio.
+                    </div>
+                </div>
+
+                <!-- Plan Diario y Bitácora Simplificada -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Tareas para el Día -->
+                    <div class="bg-white border border-zinc-200 rounded-lg p-5 lg:col-span-2">
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <h3 class="text-xs font-bold text-zinc-800 uppercase tracking-wider flex items-center gap-1.5">
+                                    <i class="fa-solid fa-check-double text-zinc-400"></i> Objetivos del Día
+                                </h3>
+                                <p class="text-[11px] text-zinc-500">Lista tus tareas prioritarias de hoy.</p>
+                            </div>
+                            <span class="text-[10px] bg-zinc-100 border border-zinc-200 px-2 py-0.5 rounded text-zinc-700 font-bold" id="current-day-badge">Hoy</span>
+                        </div>
+
+                        <!-- Formulario para Añadir Tarea -->
+                        <form id="todo-form" onsubmit="addTodo(event)" class="flex gap-2 mb-3">
+                            <input type="text" id="todo-input" placeholder="Ej: Repasar Art. 15 CE o practicar Word" required class="flex-1 bg-white border border-zinc-300 rounded px-3 py-2 text-xs text-zinc-800 focus:outline-none focus:border-zinc-500">
+                            <button type="submit" class="bg-zinc-800 hover:bg-zinc-900 text-white font-bold px-3 py-2 rounded text-xs transition-colors flex items-center gap-1">
+                                <i class="fa-solid fa-plus"></i> Añadir
+                            </button>
+                        </form>
+
+                        <!-- Lista de Tareas diarias -->
+                        <div id="todo-list" class="space-y-1.5 max-h-[220px] overflow-y-auto">
+                            <!-- Inyección dinámica -->
+                        </div>
+                    </div>
+
+                    <!-- Guía Simplificada de Ruta -->
+                    <div class="bg-white border border-zinc-200 rounded-lg p-5 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[9px] font-bold text-zinc-400 uppercase block">Estrategia</span>
+                            <h3 class="text-sm font-bold text-zinc-900 mt-0.5">Enfoque Ordenado</h3>
+                            <p class="text-xs text-zinc-600 mt-2 leading-relaxed">
+                                El temario está dividido en bloques semanales lógicos. Mantén un ritmo de estudio cómodo y constante. Marca tus hitos y usa el simulador para medir tus tiempos de respuesta de forma regular.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-zinc-200">
+                            <div class="flex gap-2">
+                                <button onclick="switchTab('cronometro')" class="flex-1 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-center py-2 rounded text-[11px] font-bold border border-zinc-300 transition-colors">
+                                    <i class="fa-solid fa-stopwatch mr-1 text-zinc-500"></i> Iniciar Crono
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grilla de Acceso Rápido a Semanas -->
+                <div class="bg-white border border-zinc-200 rounded-lg p-5">
+                    <h3 class="text-xs font-bold text-zinc-800 uppercase tracking-wider mb-3">Acceso Rápido por Semanas</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2" id="quick-week-grid">
+                        <!-- Inyectado dinámicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: CRONOGRAMA SEMANAL (SEGUIMIENTO DE HORAS) -->
+            <section id="tab-cronograma" class="hidden space-y-6">
+                <div class="bg-white border border-zinc-200 rounded-lg p-5">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+                        <div>
+                            <h3 class="text-sm font-bold text-zinc-800 uppercase tracking-wider">Cronograma de Horas del Plan</h3>
+                            <p class="text-xs text-zinc-500 mt-0.5">Escribe tus horas reales de estudio para registrar tu constancia y progreso automático.</p>
+                        </div>
+                        <button onclick="resetAllHours()" class="bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 px-3 py-1.5 rounded text-xs font-semibold transition-colors">
+                            <i class="fa-solid fa-trash-can mr-1"></i> Reiniciar Horas
+                        </button>
+                    </div>
+
+                    <!-- Tabla de Horas -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="border-b border-zinc-200 text-zinc-500 font-bold uppercase bg-zinc-50">
+                                    <th class="py-3 px-3">Fase</th>
+                                    <th class="py-3 px-3">Semana</th>
+                                    <th class="py-3 px-3">Objetivo Semanal</th>
+                                    <th class="py-3 px-3 text-center">Horas Estimadas</th>
+                                    <th class="py-3 px-3 text-center">Horas Reales</th>
+                                    <th class="py-3 px-3 text-center">Progreso</th>
+                                    <th class="py-3 px-3 text-right">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cronograma-table-body" class="divide-y divide-zinc-200 text-zinc-700">
+                                <!-- Inyectado dinámicamente -->
+                            </tbody>
+                            <tfoot>
+                                <tr class="bg-zinc-50 font-bold border-t border-zinc-300">
+                                    <td class="py-3 px-3 text-zinc-600" colspan="3">TOTALES</td>
+                                    <td class="py-3 px-3 text-center text-zinc-500">198h</td>
+                                    <td class="py-3 px-3 text-center text-zinc-900" id="total-horas-reales-footer">0h</td>
+                                    <td class="py-3 px-3 text-center text-zinc-900" id="total-progreso-footer">0.0%</td>
+                                    <td class="py-3 px-3 text-right text-zinc-500" id="global-alert-badge">-</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: TEMARIO OFICIAL (TUTORÍA INTERACTIVA DE IA) -->
+            <section id="tab-temario" class="hidden space-y-6">
+                <div class="bg-white border border-zinc-200 rounded-lg p-5">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+                        <div>
+                            <h3 class="text-sm font-bold text-zinc-800 uppercase tracking-wider">Temas del Programa Oficial (Auxiliar AGE)</h3>
+                            <p class="text-xs text-zinc-500 mt-0.5">Asignación estructurada por semanas. Usa el botón de IA en cada concepto para ver una explicación sencilla, un ejemplo de uso en oficina y reglas de memoria.</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[10px] text-zinc-400 font-bold uppercase block">Hitos Conseguidos:</span>
+                            <span id="temario-check-count" class="text-base font-extrabold text-zinc-900">0 / 0</span>
+                        </div>
+                    </div>
+
+                    <!-- Contenedor del Temario Desplegado por Semanas -->
+                    <div id="temario-accordion-container" class="space-y-3">
+                        <!-- Inyectado dinámicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: TEMPORIZADOR, SIMULADOR Y TESTIA -->
+            <section id="tab-cronometro" class="hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Cronómetro de Estudio del Opositor -->
+                    <div class="bg-white border border-zinc-200 rounded-lg p-5 lg:col-span-2 flex flex-col justify-between shadow-sm relative">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-xs font-bold text-zinc-800 uppercase tracking-wider">Cronómetro de Simulación y Enfoque</h3>
+                                <p class="text-xs text-zinc-500 mt-0.5">Mide tus tiempos en simulaciones de examen (Fase 4: 90 minutos) o sesiones de estudio.</p>
+                            </div>
+                            <span class="text-[9px] font-bold text-zinc-600 bg-zinc-100 border border-zinc-200 px-2 py-0.5 rounded" id="timer-mode-label">Simulacro Examen</span>
+                        </div>
+
+                        <!-- Display Numérico del Tiempo -->
+                        <div class="my-6 text-center">
+                            <div class="text-5xl sm:text-7xl font-bold text-zinc-900 tracking-wider font-mono" id="timer-display">
+                                90:00
+                            </div>
+                            <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-wider mt-1">Minutos : Segundos</p>
+                        </div>
+
+                        <!-- Botones del Temporizador -->
+                        <div class="flex justify-center items-center gap-3 mb-6">
+                            <button onclick="toggleTimer()" id="btn-timer-play" class="h-10 px-5 rounded bg-zinc-800 hover:bg-zinc-900 text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors">
+                                <i class="fa-solid fa-play" id="timer-play-icon"></i> <span id="timer-play-text">Iniciar</span>
+                            </button>
+                            <button onclick="resetTimer()" class="h-10 px-3 rounded bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-300 text-xs flex items-center justify-center transition-colors" title="Restablecer">
+                                <i class="fa-solid fa-rotate-left"></i>
+                            </button>
+                        </div>
+
+                        <!-- Presets de Tiempo Predefinidos -->
+                        <div class="grid grid-cols-3 gap-2 border-t border-zinc-200 pt-4">
+                            <button onclick="setTimerPreset(90, 'SIMULACRO_EXAMEN')" class="bg-zinc-50 border border-zinc-200 hover:border-zinc-400 py-2 rounded text-center">
+                                <span class="text-zinc-800 font-bold text-xs block">90 min</span>
+                                <span class="text-[9px] text-zinc-500 block">Simulacro Real</span>
+                            </button>
+                            <button onclick="setTimerPreset(25, 'POMODORO')" class="bg-zinc-50 border border-zinc-200 hover:border-zinc-400 py-2 rounded text-center">
+                                <span class="text-zinc-800 font-bold text-xs block">25 min</span>
+                                <span class="text-[9px] text-zinc-500 block">Pomodoro</span>
+                            </button>
+                            <button onclick="setTimerPreset(50, 'CONCENTRACION')" class="bg-zinc-50 border border-zinc-200 hover:border-zinc-400 py-2 rounded text-center">
+                                <span class="text-zinc-800 font-bold text-xs block">50 min</span>
+                                <span class="text-[9px] text-zinc-500 block">Concentrado</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bitácora Simple de Simulacros -->
+                    <div class="bg-white border border-zinc-200 rounded-lg p-5 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xs font-bold text-zinc-800 uppercase tracking-wider">Bitácora de Simulacros Realizados</h3>
+                            <p class="text-[11px] text-zinc-500 mt-0.5">Anota tu puntaje obtenido tras un simulacro para ver tu evolución histórica.</p>
+
+                            <!-- Formulario de Notas -->
+                            <form id="exam-log-form" onsubmit="addExamResult(event)" class="space-y-2.5 mt-3">
+                                <div>
+                                    <label class="text-[9px] font-bold text-zinc-400 uppercase tracking-wider block">Nombre del Simulacro</label>
+                                    <input type="text" id="exam-name" placeholder="Ej: Simulacro AGE Oficial 2024" required class="w-full bg-white border border-zinc-300 rounded px-2 py-1.5 text-xs text-zinc-800 focus:outline-none focus:border-zinc-500">
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="text-[9px] font-bold text-zinc-400 uppercase block">Aciertos</label>
+                                        <input type="number" id="exam-correct" min="0" placeholder="0" required class="w-full bg-white border border-zinc-300 rounded px-2 py-1.5 text-xs text-zinc-800 focus:outline-none focus:border-zinc-500">
+                                    </div>
+                                    <div>
+                                        <label class="text-[9px] font-bold text-zinc-400 uppercase block">Fallos (Resta 0.33)</label>
+                                        <input type="number" id="exam-wrong" min="0" placeholder="0" required class="w-full bg-white border border-zinc-300 rounded px-2 py-1.5 text-xs text-zinc-800 focus:outline-none focus:border-zinc-500">
+                                    </div>
+                                </div>
+                                <button type="submit" class="w-full bg-zinc-800 hover:bg-zinc-900 text-white text-[11px] font-bold py-2 rounded transition-colors">
+                                    Registrar Examen
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Histórico Corto -->
+                        <div class="mt-4 border-t border-zinc-200 pt-3">
+                            <span class="text-[9px] font-bold tracking-wider text-zinc-400 uppercase block mb-1">Historial de Intentos</span>
+                            <div id="exam-results-list" class="space-y-1.5 max-h-[110px] overflow-y-auto">
+                                <!-- Resultados dinámicos -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generador de Preguntas Tipo Test del Temario Actual -->
+                <div class="bg-white border border-zinc-200 rounded-lg p-5 shadow-sm">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+                        <div>
+                            <h3 class="text-xs font-bold text-zinc-800 uppercase tracking-wider flex items-center gap-1">
+                                <i class="fa-solid fa-feather text-zinc-400"></i> Autoevaluación Práctica con IA
+                            </h3>
+                            <p class="text-xs text-zinc-500 mt-0.5">El sistema creará una pregunta de opción múltiple ajustada al tema de tu semana activa.</p>
+                        </div>
+                        <button onclick="generateAITestQuestion()" id="btn-generate-test" class="bg-zinc-800 hover:bg-zinc-900 text-white font-bold text-xs px-3.5 py-1.5 rounded transition-colors">
+                            Generar Pregunta del Tema
+                        </button>
+                    </div>
+
+                    <!-- Panel de Carga y Pregunta Generada -->
+                    <div id="ai-test-panel" class="space-y-3">
+                        <div class="bg-zinc-50 p-6 rounded border border-zinc-200 text-xs text-zinc-500 italic text-center">
+                            Ninguna pregunta generada. Pulsa el botón "Generar Pregunta del Tema" para iniciar el simulacro de prueba adaptativo de esta semana.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: DIRECTORIO, PROMPT MAESTRO Y ASISTENTE IA -->
+            <section id="tab-directorio" class="hidden space-y-6">
+                <!-- Enlaces Oficiales para el Opositor -->
+                <div class="bg-white border border-zinc-200 rounded-lg p-5">
+                    <h3 class="text-xs font-bold text-zinc-800 uppercase tracking-wider mb-3">Directorio Oficial de Plazas y Boletines</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                        <!-- Buscador Central -->
+                        <div class="bg-zinc-50 border border-zinc-200 rounded p-3 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[9px] font-bold text-zinc-500 bg-zinc-200 px-2 py-0.5 rounded uppercase tracking-wider">CADA VIERNES</span>
+                                <h4 class="text-xs font-bold text-zinc-900 mt-2">Buscador AGE</h4>
+                                <p class="text-[11px] text-zinc-600 mt-1 leading-relaxed">Convocatorias estatales consolidadas de nivel C1/C2.</p>
+                            </div>
+                            <a href="https://administracion.gob.es/pagHome/empleoPublico/buscador.html" target="_blank" class="mt-3 inline-flex items-center justify-center gap-1 text-[11px] font-bold text-zinc-700 bg-white hover:bg-zinc-100 py-1.5 rounded border border-zinc-300 transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i> Abrir Buscador
+                            </a>
+                        </div>
+
+                        <!-- Portal INAP -->
+                        <div class="bg-zinc-50 border border-zinc-200 rounded p-3 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[9px] font-bold text-zinc-500 bg-zinc-200 px-2 py-0.5 rounded uppercase tracking-wider">MENSUAL</span>
+                                <h4 class="text-xs font-bold text-zinc-900 mt-2">Portal INAP (AGE)</h4>
+                                <p class="text-[11px] text-zinc-600 mt-1 leading-relaxed">Listados, fechas de exámenes y plantillas oficiales.</p>
+                            </div>
+                            <a href="https://forma.administracion.gob.es/public/index.htm" target="_blank" class="mt-3 inline-flex items-center justify-center gap-1 text-[11px] font-bold text-zinc-700 bg-white hover:bg-zinc-100 py-1.5 rounded border border-zinc-300 transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i> Abrir Portal
+                            </a>
+                        </div>
+
+                        <!-- Comunidad de Madrid -->
+                        <div class="bg-zinc-50 border border-zinc-200 rounded p-3 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[9px] font-bold text-zinc-500 bg-zinc-200 px-2 py-0.5 rounded uppercase tracking-wider">CADA 15 DÍAS</span>
+                                <h4 class="text-xs font-bold text-zinc-900 mt-2">Comunidad de Madrid</h4>
+                                <p class="text-[11px] text-zinc-600 mt-1 leading-relaxed">Plazas C2 y aperturas urgentes de bolsas temporales locales.</p>
+                            </div>
+                            <a href="https://www.comunidad.madrid/empleo/empleo-publico" target="_blank" class="mt-3 inline-flex items-center justify-center gap-1 text-[11px] font-bold text-zinc-700 bg-white hover:bg-zinc-100 py-1.5 rounded border border-zinc-300 transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i> Abrir BOCM
+                            </a>
+                        </div>
+
+                        <!-- Ayuntamiento de Madrid -->
+                        <div class="bg-zinc-50 border border-zinc-200 rounded p-3 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[9px] font-bold text-zinc-500 bg-zinc-200 px-2 py-0.5 rounded uppercase tracking-wider">CADA 15 DÍAS</span>
+                                <h4 class="text-xs font-bold text-zinc-900 mt-2">Ayuntamiento de Madrid</h4>
+                                <p class="text-[11px] text-zinc-600 mt-1 leading-relaxed">Procesos de selección locales de la capital.</p>
+                            </div>
+                            <a href="https://madrid.es/oposiciones" target="_blank" class="mt-3 inline-flex items-center justify-center gap-1 text-[11px] font-bold text-zinc-700 bg-white hover:bg-zinc-100 py-1.5 rounded border border-zinc-300 transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i> Abrir Portal
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chatbot con Buscador Grounding & Prompt Maestro Directo -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Consultor de IA Interactivo -->
+                    <div class="bg-white border border-zinc-200 rounded-lg p-5 lg:col-span-2 flex flex-col h-[500px]">
+                        <div class="flex items-center justify-between pb-3 border-b border-zinc-200">
+                            <div class="flex items-center gap-2">
+                                <div class="h-6 w-6 rounded bg-zinc-800 text-white flex items-center justify-center text-[11px]">
+                                    <i class="fa-solid fa-robot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-zinc-800">Consultor Inteligente de Convocatorias</h4>
+                                    <p class="text-[10px] text-zinc-500 font-semibold">Google Search Grounding Conectado</p>
+                                </div>
+                            </div>
+                            <button onclick="clearChat()" class="text-[11px] text-zinc-500 hover:text-red-600 transition-colors">
+                                Borrar Chat
+                            </button>
+                        </div>
+
+                        <!-- Panel de Mensajes -->
+                        <div id="chat-messages" class="flex-1 overflow-y-auto my-3 space-y-3 pr-1 text-xs">
+                            <!-- Mensaje de bienvenida adaptativo -->
+                        </div>
+
+                        <!-- Entrada de consulta del chat -->
+                        <form id="chat-form" onsubmit="sendMessage(event)" class="flex gap-2">
+                            <input type="text" id="chat-input" placeholder="Pregunta dudas de leyes o busca convocatorias..." required class="flex-1 bg-white border border-zinc-300 rounded px-3 py-2 text-xs text-zinc-800 focus:outline-none focus:border-zinc-500">
+                            <button type="submit" id="btn-chat-send" class="bg-zinc-800 hover:bg-zinc-900 text-white font-bold px-4 rounded text-xs transition-colors flex items-center justify-center">
+                                <i class="fa-solid fa-paper-plane" id="chat-send-icon"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Prompt Maestro Copiable Sin Distracciones -->
+                    <div class="bg-white border border-zinc-200 rounded-lg p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-[9px] font-bold text-zinc-400 uppercase tracking-wider block">Filtro Externo</span>
+                                <button onclick="copyMasterPrompt()" class="bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[10px] border border-zinc-300 px-2 py-0.5 rounded font-bold transition-all">
+                                    Copiar
+                                </button>
+                            </div>
+                            <h3 class="text-xs font-bold text-zinc-900 uppercase tracking-wider">Prompt de Configuración</h3>
+                            <p class="text-xs text-zinc-600 mt-1 leading-relaxed">
+                                Si quieres interrogar a una IA con los boletines en PDF por tu cuenta, usa este prompt optimizado:
+                            </p>
+                            <div class="bg-zinc-50 rounded border border-zinc-200 p-2.5 mt-3 relative max-h-[160px] overflow-y-auto">
+                                <textarea id="prompt-box" rows="8" readonly class="w-full bg-transparent border-none text-zinc-600 text-[10px] leading-relaxed focus:outline-none focus:ring-0 resize-none font-mono">Actúa como un Consultor de Empleo Público Especializado en España. Tu objetivo es procesar las actualizaciones normativas y boletines oficiales para un candidato de 47 años en Madrid con urgencia de inserción laboral.
+
+Filtra estrictamente los datos bajo las siguientes directrices:
+1. Nivel académico de búsqueda principal: Grupo C2 (Auxiliar) y Grupo C1 (Administrativo).
+2. Ubicación: Únicamente plazas con destino en la provincia de Madrid.
+3. Priorización absoluta: Oposiciones masivas anuales sin fase de méritos (Oposición pura de la AGE) y bolsas de empleo temporal de apertura urgente.
+4. Categorías de interés complementarias: Plazas en Ministerios de Cultura, Museos Estatales o Bibliotecas Públicas debido a su perfil en artes visuales.
+
+Entrega la información de manera estructurada omitiendo divagaciones legales y destacando siempre: Plazo de inscripción, Enlace oficial a la convocatoria y Fecha de examen.</textarea>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-zinc-200 text-[10px] text-zinc-500 leading-relaxed">
+                            <span class="font-bold text-zinc-700 block">Nota del Buscador:</span> El consultor interactivo de la izquierda ya realiza búsquedas de plazas reales usando el motor de Gemini.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- MODAL DE EXPLICACIONES DEL TUTOR IA -->
+    <div id="ai-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm">
+        <div class="bg-white border border-zinc-300 rounded-lg w-full max-w-xl shadow-lg relative flex flex-col max-h-[85vh]">
+            <!-- Encabezado del modal -->
+            <div class="p-4 border-b border-zinc-200 flex items-center justify-between bg-zinc-50">
+                <div class="flex items-center gap-2">
+                    <span class="text-zinc-600 text-sm"><i class="fa-solid fa-graduation-cap"></i></span>
+                    <div>
+                        <h4 class="text-xs font-bold text-zinc-950 uppercase tracking-wider" id="modal-concept-title">Concepto del Temario</h4>
+                        <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-widest">Explicación Paso a Paso con IA</p>
+                    </div>
+                </div>
+                <button onclick="closeAIModal()" class="h-6 w-6 rounded hover:bg-zinc-200 flex items-center justify-center text-zinc-400 hover:text-zinc-600 transition-colors">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Contenido del modal -->
+            <div class="p-6 overflow-y-auto space-y-4 text-xs text-zinc-700 leading-relaxed" id="modal-concept-content">
+                <!-- Inyección dinámica de datos de Gemini -->
+            </div>
+
+            <!-- Pie del modal -->
+            <div class="p-4 border-t border-zinc-200 bg-zinc-50 flex justify-between items-center">
+                <span class="text-[9px] text-zinc-400 font-bold uppercase">Plan de estudios C2 AGE</span>
+                <button onclick="closeAIModal()" class="bg-zinc-800 hover:bg-zinc-900 text-white font-bold text-xs px-4 py-2 rounded transition-colors">
+                    Volver a la Agenda
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Indicador de acción completada -->
+    <div id="copy-toast" class="hidden fixed bottom-6 right-6 bg-zinc-900 text-white text-xs font-bold px-4 py-2.5 rounded shadow-lg z-50">
+        Información copiada con éxito.
+    </div>
+
+    <script>
+        // --- 1. PLAN DE ESTUDIOS UNIFICADO (ORIGEN DEL DOCUMENTO) ---
+        const PLAN_INICIAL = [
+            {
+                semana: 1,
+                fase: "Fase 1: Despegue",
+                objetivo: "Automatización del sistema, burocracia UBA y compra de temarios",
+                estimadas: 10,
+                reales: 0,
+                bloque: "Fase Inicial",
+                temas: "Puesta a punto técnica",
+                conceptos: [
+                    "Configuración del bot de IA con especificaciones",
+                    "Registro telemático de tasas en el Ministerio de Ciencia para equivalencia de la UBA",
+                    "Compra de manuales"
+                ]
+            },
+            {
+                semana: 2,
+                fase: "Fase 2: Bloque Acero",
+                objetivo: "Inicio del núcleo jurídico común a cualquier oposición española.",
+                estimadas: 15,
+                reales: 0,
+                bloque: "1. Organización Pública",
+                temas: "Tema 1: La Constitución Española",
+                conceptos: [
+                    "Estructura general de la CE y principios rectores",
+                    "Título I: Derechos y deberes fundamentales de los ciudadanos (Artículos 1 al 55)"
+                ]
+            },
+            {
+                semana: 3,
+                fase: "Fase 2: Bloque Acero",
+                objetivo: "Leyes del Estado: Órganos legislativos y prerrogativas.",
+                estimadas: 15,
+                reales: 0,
+                bloque: "1. Organización Pública",
+                temas: "Tema 2 y Tema 3: Órganos Superiores",
+                conceptos: [
+                    "La Jefatura del Estado: La Corona",
+                    "El poder legislativo: composición, atribuciones y funcionamiento del Congreso de los Diputados y del Senado"
+                ]
+            },
+            {
+                semana: 4,
+                fase: "Fase 2: Bloque Acero",
+                objetivo: "Leyes del Estado: Órganos ejecutivos y ministerios.",
+                estimadas: 15,
+                reales: 0,
+                bloque: "I. Organización Pública",
+                temas: "Tema 4 y Tema 5: El Gobierno y AGE",
+                conceptos: [
+                    "El poder ejecutivo: El Gobierno, el Presidente y el Consejo de Ministros",
+                    "Estructura de los Ministerios y organización interna de la AGE"
+                ]
+            },
+            {
+                semana: 5,
+                fase: "Fase 2: Bloque Acero",
+                objetivo: "Leyes del Estado: Estructuras territoriales y Unión Europea.",
+                estimadas: 15,
+                reales: 0,
+                bloque: "1. Organización Pública",
+                temas: "Tema 6 y Tema 7: Territorio y UE",
+                conceptos: [
+                    "La organización territorial del Estado español: Comunidades Autónomas y Administración Local",
+                    "Estructura de la Unión Europea e instituciones europeas"
+                ]
+            },
+            {
+                semana: 6,
+                fase: "Fase 2: Bloque Acero",
+                objetivo: "Consolidación legal del bloque, repaso general y test cruzados.",
+                estimadas: 18,
+                reales: 0,
+                bloque: "1. Organización Pública",
+                temas: "Tema 8: Personal al Servicio de la AGE",
+                conceptos: [
+                    "El Estatuto Básico del Empleado Público (TREBEP): derechos y deberes",
+                    "Régimen disciplinario y tipología de empleados públicos"
+                ]
+            },
+            {
+                semana: 7,
+                fase: "Fase 3: Especialización",
+                objetivo: "Ofimática teórica orientada a test: Windows.",
+                estimadas: 15,
+                reales: 0,
+                bloque: "II. Actividad Administrativa",
+                temas: "Tema 15 y 16: Informática Básica",
+                conceptos: [
+                    "El sistema operativo Windows: conceptos de entorno gráfico y menús",
+                    "Explorador de archivos, almacenamiento, copias de seguridad y redes básicas"
+                ]
+            },
+            {
+                semana: 8,
+                fase: "Fase 3: Especialización",
+                objetivo: "Ofimática teórica orientada a test: Microsoft Word avanzado.",
+                estimadas: 15,
+                reales: 0,
+                bloque: "II. Actividad Administrativa",
+                temas: "Tema 17 y 18: Procesador Word",
+                conceptos: [
+                    "Procesamiento de textos en Microsoft Word: rutas de menús, fuentes, formatos",
+                    "Tablas, configuración de páginas, sangrías y macros teóricas"
+                ]
+            },
+            {
+                semana: 9,
+                fase: "Fase 3: Especialización",
+                objetivo: "Ofimática teórica orientada a test: Microsoft Excel avanzado.",
+                estimadas: 15,
+                reales: 0,
+                bloque: "II. Actividad Administrativa",
+                temas: "Tema 19 y 20: Hoja Excel",
+                conceptos: [
+                    "Hojas de cálculo en Microsoft Excel: memorización teórica de fórmulas",
+                    "Funciones lógicas y matemáticas, referencias relativas/absolutas y gráficos"
+                ]
+            },
+            {
+                semana: 10,
+                fase: "Fase 3: Especialización",
+                objetivo: "Gestión administrativa: El Procedimiento Común (Ley 39/2015).",
+                estimadas: 15,
+                reales: 0,
+                bloque: "II. Actividad Administrativa",
+                temas: "Tema 9 y 10: Procedimiento Administrativo",
+                conceptos: [
+                    "Ley 39/2015: Fases del procedimiento común de las Administraciones Públicas",
+                    "Iniciación, ordenación, instrucción y terminación. El acto administrativo"
+                ]
+            },
+            {
+                semana: 11,
+                fase: "Fase 3: Especialización",
+                objetivo: "Gestión administrativa: El documento, registro y notificaciones.",
+                estimadas: 15,
+                reales: 0,
+                bloque: "II. Actividad Administrativa",
+                temas: "Tema 11 y 12: Documento y Registro",
+                conceptos: [
+                    "Estructura formal del documento público y copias auténticas",
+                    "Los registros electrónicos comunes, sistemas de interconexión y notificaciones"
+                ]
+            },
+            {
+                semana: 12,
+                fase: "Fase 3: Especialización",
+                objetivo: "Gestión administrativa: Atención al ciudadano, archivos y protección de datos",
+                estimadas: 15,
+                reales: 0,
+                bloque: "II. Actividad Administrativa",
+                temas: "Tema 13 y 14: Atención y Archivos",
+                conceptos: [
+                    "Derechos de los ciudadanos y Ley de Transparencia",
+                    "Técnicas de archivo y conservación documental. Protección de Datos (RGPD)"
+                ]
+            },
+            {
+                semana: 13,
+                fase: "Fase 4: Velocidad",
+                objetivo: "Simulacros de examen reales con cronómetro (Fijar en 90 min).",
+                estimadas: 20,
+                reales: 0,
+                bloque: "Simulacros",
+                temas: "Exámenes completos consolidados",
+                conceptos: [
+                    "Realización de exámenes reales combinados de convocatorias previas bajo estricto cronómetro de 90 minutos para optimizar tiempos"
+                ]
+            }
+        ];
+
+        // --- 2. CONFIGURACIÓN DEL ESTADO ---
+        let appState = {
+            semanas: JSON.parse(localStorage.getItem('opos_semanas')) || JSON.parse(JSON.stringify(PLAN_INICIAL)),
+            todos: JSON.parse(localStorage.getItem('opos_todos')) || [
+                { id: 1, text: "Configurar el bot de IA con el Prompt Maestro", done: false },
+                { id: 2, text: "Revisar convocatorias del Ayuntamiento de Madrid", done: false }
+            ],
+            examResults: JSON.parse(localStorage.getItem('opos_exams')) || [],
+            checkedConceptKeys: JSON.parse(localStorage.getItem('opos_concepts')) || {},
+            esViernes: JSON.parse(localStorage.getItem('opos_esViernes')) || false,
+            apiKey: localStorage.getItem('opos_api_key') || "",
+            chatHistory: JSON.parse(localStorage.getItem('opos_chat_history')) || [
+                { role: "model", text: "Hola. Soy tu consultor inteligente para la oposición Auxiliar (C2) y Administrativo (C1) en Madrid. Puedo aclararte dudas jurídicas o buscar convocatorias vigentes usando Google Search." }
+            ],
+            // Preferencias sensoriales para perfil autista
+            sensorySoundMute: JSON.parse(localStorage.getItem('sensory_sound_mute')) || false,
+            sensoryFocusMode: JSON.parse(localStorage.getItem('sensory_focus_mode')) || false,
+            sensoryLargeText: JSON.parse(localStorage.getItem('sensory_large_text')) || false
+        };
+
+        // --- 3. ALERTAS PERSONALIZADAS SIN COMPORTAMIENTO AGRESIVO ---
+        function showCustomAlert(title, message, level) {
+            const banner = document.getElementById('custom-alert-box');
+            const bTitle = document.getElementById('custom-alert-title');
+            const bMessage = document.getElementById('custom-alert-message');
+            const bIcon = document.getElementById('custom-alert-icon');
+
+            bTitle.innerText = title;
+            bMessage.innerText = message;
+
+            banner.className = "mb-6 p-4 rounded-lg border text-xs flex items-center justify-between transition-all ";
+
+            if (level === 'ERROR' || level === 'HIGH') {
+                banner.classList.add('bg-red-50', 'border-red-200', 'text-red-800');
+                bIcon.innerHTML = '<i class="fa-solid fa-circle-exclamation text-red-600"></i>';
+                playSensorySound(280, 'sine', 0.2); // Frecuencia baja, no molesta
+            } else if (level === 'WARN') {
+                banner.classList.add('bg-amber-50', 'border-amber-200', 'text-amber-800');
+                bIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-amber-600"></i>';
+                playSensorySound(330, 'sine', 0.15);
+            } else {
+                banner.classList.add('bg-zinc-100', 'border-zinc-300', 'text-zinc-800');
+                bIcon.innerHTML = '<i class="fa-solid fa-circle-check text-zinc-600"></i>';
+                playSensorySound(440, 'sine', 0.15);
+            }
+
+            banner.classList.remove('hidden');
+        }
+
+        function closeCustomAlert() {
+            document.getElementById('custom-alert-box').classList.add('hidden');
+        }
+
+        // --- 4. CONTROL DE AUDIO CALMANTE (ADAPTADO) ---
+        function playSensorySound(frequency, type, duration) {
+            // No reproducir sonidos si el usuario activó silencio sensorial
+            if (appState.sensorySoundMute) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                // Usar siempre ondas 'sine' (senoidal), son los sonidos menos estridentes y más limpios para el oído
+                osc.type = 'sine';
+                osc.frequency.value = frequency || 350;
+                
+                // Volumen muy bajo para evitar sobresaltos
+                gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + duration);
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                osc.start();
+                osc.stop(ctx.currentTime + duration);
+            } catch (e) {
+                console.log("Audio contextual no soportado o bloqueado.");
+            }
+        }
+
+        // --- 5. PERSISTENCIA Y GUARDADO ---
+        function saveState() {
+            localStorage.setItem('opos_semanas', JSON.stringify(appState.semanas));
+            localStorage.setItem('opos_todos', JSON.stringify(appState.todos));
+            localStorage.setItem('opos_exams', JSON.stringify(appState.examResults));
+            localStorage.setItem('opos_concepts', JSON.stringify(appState.checkedConceptKeys));
+            localStorage.setItem('opos_esViernes', JSON.stringify(appState.esViernes));
+            localStorage.setItem('opos_chat_history', JSON.stringify(appState.chatHistory));
+            localStorage.setItem('sensory_sound_mute', JSON.stringify(appState.sensorySoundMute));
+            localStorage.setItem('sensory_focus_mode', JSON.stringify(appState.sensoryFocusMode));
+            localStorage.setItem('sensory_large_text', JSON.stringify(appState.sensoryLargeText));
+            recalculateMetrics();
+        }
+
+        function saveApiKey() {
+            const val = document.getElementById('api-key-input').value.trim();
+            appState.apiKey = val;
+            localStorage.setItem('opos_api_key', val);
+            showCustomAlert("Configuración guardada", "Clave API local actualizada correctamente.", "SUCCESS");
+        }
+
+        // --- 6. PREFERENCIAS SENSORIALES (AUTISTA-FRIENDLY) ---
+        function toggleSensorySound() {
+            appState.sensorySoundMute = document.getElementById('sensory-sound-mute').checked;
+            saveState();
+        }
+
+        function toggleFocusMode() {
+            appState.sensoryFocusMode = document.getElementById('sensory-focus-mode').checked;
+            const banner = document.getElementById('sensory-advisement-banner');
+            if (appState.sensoryFocusMode) {
+                banner.classList.add('hidden'); // Ocultar banner de IA en modo enfoque máximo
+            } else {
+                banner.classList.remove('hidden');
+            }
+            saveState();
+        }
+
+        function toggleLargeText() {
+            appState.sensoryLargeText = document.getElementById('sensory-large-text').checked;
+            const body = document.getElementById('app-body');
+            const modal = document.getElementById('ai-modal');
+            if (appState.sensoryLargeText) {
+                body.classList.add('sensory-text-lg');
+                modal.classList.add('sensory-text-lg');
+            } else {
+                body.classList.remove('sensory-text-lg');
+                modal.classList.remove('sensory-text-lg');
+            }
+            saveState();
+        }
+
+        // --- STREAMING_CHUNK: Integrating the Gemini API connector... -->
+        // --- 7. CONECTIVIDAD DIRECTA CON GEMINI ---
+        async function fetchGemini(userPrompt, systemInstructionText, responseSchema = null, useSearch = false) {
+            const apiKeyValue = appState.apiKey || ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKeyValue}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userPrompt }] }]
+            };
+
+            if (systemInstructionText) {
+                payload.systemInstruction = {
+                    parts: [{ text: systemInstructionText }]
+                };
+            }
+
+            if (useSearch) {
+                payload.tools = [{ "google_search": {} }];
+            }
+
+            if (responseSchema) {
+                payload.generationConfig = {
+                    responseMimeType: "application/json",
+                    responseSchema: responseSchema
+                };
+            }
+
+            const maxRetries = 3;
+            let delay = 1000;
+
+            for (let attempt = 1; attempt <= maxRetries; attempt++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.status === 429) {
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        delay *= 2;
+                        continue;
+                    }
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP Error: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        const text = candidate.content.parts[0].text;
+                        
+                        let sources = [];
+                        const groundingMetadata = candidate.groundingMetadata;
+                        if (groundingMetadata && groundingMetadata.groundingAttributions) {
+                            sources = groundingMetadata.groundingAttributions
+                                .map(attribution => ({
+                                    uri: attribution.web?.uri,
+                                    title: attribution.web?.title,
+                                }))
+                                .filter(source => source.uri && source.title);
+                        }
+
+                        return { text, sources };
+                    } else {
+                        throw new Error("Respuesta no válida del motor Gemini.");
+                    }
+
+                } catch (error) {
+                    if (attempt === maxRetries) {
+                        throw error;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        // --- 8. CÁLCULO DE MÉTRICAS Y ACTUALIZACIONES ---
+        function recalculateMetrics() {
+            let totalEst = 0;
+            let totalReal = 0;
+            let totalConceptosMax = 0;
+            let totalConceptosChecked = 0;
+
+            appState.semanas.forEach(s => {
+                totalEst += s.estimadas;
+                totalReal += s.reales;
+
+                s.conceptos.forEach((_, idx) => {
+                    const key = `semana-${s.semana}-concepto-${idx}`;
+                    totalConceptosMax++;
+                    if (appState.checkedConceptKeys[key]) {
+                        totalConceptosChecked++;
+                    }
+                });
+            });
+
+            const globalProgressPercent = ((totalReal / totalEst) * 100).toFixed(1);
+
+            document.getElementById('stat-progreso').innerText = `${globalProgressPercent}%`;
+            document.getElementById('stat-progreso-bar').style.width = `${Math.min(globalProgressPercent, 100)}%`;
+            document.getElementById('stat-horas-reales').innerText = totalReal;
+            document.getElementById('stat-horas-restantes').innerText = `${Math.max(0, totalEst - totalReal)} horas pendientes`;
+
+            let currentWeekIndex = appState.semanas.findIndex(s => s.reales < s.estimadas);
+            if (currentWeekIndex === -1) currentWeekIndex = appState.semanas.length - 1;
+            const sActiva = appState.semanas[currentWeekIndex];
+
+            document.getElementById('stat-fase-nombre').innerText = sActiva.fase;
+            document.getElementById('stat-semana-nombre').innerText = `Semana ${sActiva.semana} de 13`;
+
+            // Cuenta de temario
+            document.getElementById('temario-check-count').innerText = `${totalConceptosChecked} / ${totalConceptosMax}`;
+
+            // Determinar Alertas de progreso semanal
+            const alertas = checkAlerts(sActiva);
+            const alertIconDiv = document.getElementById('stat-alert-icon');
+            const alertTitle = document.getElementById('stat-alert-title');
+            const alertDesc = document.getElementById('stat-alert-desc');
+
+            if (alertas.alertLevel === 'HIGH') {
+                alertIconDiv.innerHTML = '<i class="fa-solid fa-circle-exclamation text-red-600"></i>';
+                alertTitle.innerText = "Objetivo Pendiente";
+                alertTitle.className = "text-xs font-bold text-red-600";
+                alertDesc.innerText = alertas.message;
+            } else if (alertas.alertLevel === 'WARN') {
+                alertIconDiv.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-amber-600"></i>';
+                alertTitle.innerText = "Meta Intermedia";
+                alertTitle.className = "text-xs font-bold text-amber-600";
+                alertDesc.innerText = alertas.message;
+            } else {
+                alertIconDiv.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i>';
+                alertTitle.innerText = "Plan Completo";
+                alertTitle.className = "text-xs font-bold text-emerald-600";
+                alertDesc.innerText = alertas.message;
+            }
+
+            const footerReal = document.getElementById('total-horas-reales-footer');
+            const footerProg = document.getElementById('total-progreso-footer');
+            if (footerReal) footerReal.innerText = `${totalReal}h`;
+            if (footerProg) footerProg.innerText = `${globalProgressPercent}%`;
+
+            renderQuickGrid();
+        }
+
+        function checkAlerts(semanaActiva) {
+            if (appState.esViernes) {
+                if (semanaActiva.reales === 0) {
+                    return { alertLevel: 'HIGH', message: `Semana ${semanaActiva.semana} sin iniciar.` };
+                } else if (semanaActiva.reales < semanaActiva.estimadas) {
+                    return { alertLevel: 'WARN', message: `Faltan ${semanaActiva.estimadas - semanaActiva.reales}h para tu meta.` };
+                }
+                return { alertLevel: 'OK', message: `Objetivo semanal conseguido.` };
+            }
+            if (semanaActiva.reales > 0 && semanaActiva.reales < semanaActiva.estimadas) {
+                return { alertLevel: 'OK', message: "Estudio en curso." };
+            }
+            if (semanaActiva.reales >= semanaActiva.estimadas) {
+                return { alertLevel: 'OK', message: "Meta semanal completada." };
+            }
+            return { alertLevel: 'OK', message: "Progreso al día." };
+        }
+
+        function toggleViernes() {
+            appState.esViernes = document.getElementById('check-viernes').checked;
+            const ind = document.getElementById('indicador-viernes');
+            if (appState.esViernes) {
+                ind.className = "h-3 w-3 rounded-full bg-red-600";
+                ind.title = "Viernes de Control";
+                showCustomAlert("Revisión de Viernes Activo", "Comprobando horas de constancia de la semana.", "WARN");
+            } else {
+                ind.className = "h-3 w-3 rounded-full bg-zinc-300";
+                ind.title = "Control desactivado";
+                closeCustomAlert();
+            }
+            saveState();
+            renderCronograma();
+        }
+
+        // --- 9. NAVEGACIÓN DE TABS ---
+        function switchTab(tabId) {
+            ['dashboard', 'cronograma', 'temario', 'cronometro', 'directorio'].forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`btn-${id}`).classList.remove('bg-zinc-100', 'text-zinc-900', 'border', 'border-zinc-200');
+                document.getElementById(`btn-${id}`).classList.add('text-zinc-600');
+            });
+
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`btn-${tabId}`).classList.add('bg-zinc-100', 'text-zinc-900', 'border', 'border-zinc-200');
+            document.getElementById(`btn-${tabId}`).classList.remove('text-zinc-600');
+
+            if (tabId === 'cronograma') renderCronograma();
+            if (tabId === 'temario') renderTemario();
+            if (tabId === 'directorio') renderChatHistory();
+        }
+
+        // --- 10. RENDERS DE INTERFAZ SENSORIAL ---
+        // 10.1 Cuadrícula rápida (Dashboard)
+        function renderQuickGrid() {
+            const container = document.getElementById('quick-week-grid');
+            container.innerHTML = '';
+
+            appState.semanas.forEach(s => {
+                const perc = s.estimadas > 0 ? Math.round((s.reales / s.estimadas) * 100) : 0;
+                let colorClass = 'border-zinc-200 hover:border-zinc-300 bg-white text-zinc-700';
+                if (perc >= 100) {
+                    colorClass = 'border-zinc-800 bg-zinc-100 text-zinc-950 font-bold';
+                } else if (perc > 0) {
+                    colorClass = 'border-zinc-400 bg-zinc-50 text-zinc-800';
+                }
+
+                container.innerHTML += `
+                    <div onclick="switchTab('cronograma')" class="border rounded p-2 text-center cursor-pointer transition-all hover:scale-[1.01] ${colorClass}">
+                        <div class="text-[9px] font-bold text-zinc-400 uppercase">S. ${s.semana}</div>
+                        <div class="text-[10px] mt-0.5 truncate">${s.temas.substring(0, 16)}...</div>
+                        <div class="text-xs font-bold mt-1">${perc}%</div>
+                    </div>
+                `;
+            });
+        }
+
+        // 10.2 Cronograma de Horas Semanales
+        function renderCronograma() {
+            const tbody = document.getElementById('cronograma-table-body');
+            tbody.innerHTML = '';
+
+            appState.semanas.forEach((s, idx) => {
+                const perc = ((s.reales / s.estimadas) * 100).toFixed(1);
+                
+                let statusBadge = '<span class="text-zinc-400 text-xs">Pendiente</span>';
+                if (appState.esViernes) {
+                    if (s.reales >= s.estimadas) {
+                        statusBadge = '<span class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-200">Cumplido</span>';
+                    } else if (s.reales > 0) {
+                        statusBadge = '<span class="text-amber-700 bg-amber-50 px-2 py-0.5 rounded text-[10px] font-bold border border-amber-200">Insuficiente</span>';
+                    } else {
+                        statusBadge = '<span class="text-red-700 bg-red-50 px-2 py-0.5 rounded text-[10px] font-bold border border-red-200">Sin iniciar</span>';
+                    }
+                } else {
+                    if (s.reales >= s.estimadas) {
+                        statusBadge = '<span class="text-zinc-700 bg-zinc-100 px-2 py-0.5 rounded text-[10px] font-bold border border-zinc-200">Completada</span>';
+                    } else if (s.reales > 0) {
+                        statusBadge = '<span class="text-zinc-700 bg-zinc-50 px-2 py-0.5 rounded text-[10px] border border-zinc-200">En curso</span>';
+                    }
+                }
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-zinc-50 transition-colors">
+                        <td class="py-2.5 px-3 text-[10px] text-zinc-500">${s.fase}</td>
+                        <td class="py-2.5 px-3 font-bold text-zinc-950">Semana ${s.semana}</td>
+                        <td class="py-2.5 px-3 text-xs text-zinc-700 max-w-xs leading-normal">${s.objetivo}</td>
+                        <td class="py-2.5 px-3 text-center text-zinc-500">${s.estimadas}h</td>
+                        <td class="py-2.5 px-3 text-center">
+                            <input type="number" min="0" max="100" value="${s.reales}" onchange="updateWeekHours(${idx}, this.value)" class="w-14 bg-white border border-zinc-300 rounded px-1.5 py-0.5 text-center font-bold text-zinc-800 focus:outline-none focus:border-zinc-500">
+                        </td>
+                        <td class="py-2.5 px-3 text-center font-semibold text-zinc-800">${perc}%</td>
+                        <td class="py-2.5 px-3 text-right">${statusBadge}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function updateWeekHours(idx, value) {
+            let num = parseInt(value);
+            if (isNaN(num) || num < 0) num = 0;
+            appState.semanas[idx].reales = num;
+            saveState();
+        }
+
+        function resetAllHours() {
+            appState.semanas.forEach(s => s.reales = 0);
+            saveState();
+            renderCronograma();
+            playSensorySound(220, 'sine', 0.2);
+        }
+
+        // --- STREAMING_CHUNK: Structuring accessible syllabus list... -->
+        // 10.3 Temario con Hitos y Explicación IA Directa
+        function renderTemario() {
+            const container = document.getElementById('temario-accordion-container');
+            container.innerHTML = '';
+
+            appState.semanas.forEach((s) => {
+                let listHTML = '';
+                
+                s.conceptos.forEach((c, idx) => {
+                    const key = `semana-${s.semana}-concepto-${idx}`;
+                    const isChecked = appState.checkedConceptKeys[key] ? 'checked' : '';
+                    
+                    listHTML += `
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2 rounded bg-zinc-50 border border-zinc-200">
+                            <label class="flex items-start gap-2 cursor-pointer flex-1">
+                                <input type="checkbox" ${isChecked} onchange="toggleConcept('${key}')" class="rounded mt-0.5 border-zinc-300 text-zinc-800 focus:ring-zinc-500">
+                                <span class="text-xs text-zinc-700 leading-normal">${c}</span>
+                            </label>
+                            <button onclick="explainConcept('${c}')" class="shrink-0 bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-300 text-[10px] font-bold px-2 py-1 rounded transition-all flex items-center gap-1 self-end sm:self-auto">
+                                <i class="fa-solid fa-graduation-cap text-zinc-500"></i> Explicar con IA
+                            </button>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML += `
+                    <div class="border border-zinc-200 rounded bg-white overflow-hidden">
+                        <div class="p-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-zinc-200 bg-zinc-50">
+                            <div>
+                                <span class="text-[9px] font-bold text-zinc-400 uppercase block">${s.bloque}</span>
+                                <h4 class="text-xs font-bold text-zinc-800 mt-0.5">${s.temas}</h4>
+                            </div>
+                            <span class="text-[10px] font-bold bg-white border border-zinc-300 px-2 py-0.5 rounded text-zinc-700">Semana ${s.semana}</span>
+                        </div>
+                        <div class="p-3 space-y-2">
+                            ${listHTML}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleConcept(key) {
+            appState.checkedConceptKeys[key] = !appState.checkedConceptKeys[key];
+            playSensorySound(480, 'sine', 0.08);
+            saveState();
+            renderTemario();
+        }
+
+        // --- STREAMING_CHUNK: Trimming explanations and showing clean modals... -->
+        // --- 11. TUTOR IA - EXPLICAR CONCEPTOS LEGALES ---
+        async function explainConcept(conceptText) {
+            document.getElementById('modal-concept-title').innerText = conceptText;
+            const contentArea = document.getElementById('modal-concept-content');
+            
+            contentArea.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-10 space-y-2">
+                    <i class="fa-solid fa-circle-notch animate-spin text-xl text-zinc-500"></i>
+                    <p class="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">El Tutor IA está analizando este concepto para redactar una guía directa...</p>
+                </div>
+            `;
+            
+            document.getElementById('ai-modal').classList.remove('hidden');
+
+            const systemPrompt = "Eres un tutor para un opositor con perfil neurodivergente (autista) en España. Escribe explicaciones sumamente lógicas, bien estructuradas, usando un lenguaje directo, descriptivo y sin rodeos líricos o adornos de lenguaje. Divide claramente los apartados.";
+            const userPrompt = `Analiza y explica de forma directa el concepto: "${conceptText}". 
+            Usa el siguiente esquema en HTML limpio (sin contenedores exteriores):
+            <h5 class="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-1">1. ¿Qué significa de forma simple?</h5>
+            <p class="mb-4 text-zinc-700 text-xs">Explicación conceptual sin ambigüedades ni tecnicismos confusos.</p>
+            <h5 class="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-1">2. Aplicación real en el trabajo de oficina</h5>
+            <p class="mb-4 text-zinc-700 text-xs">Un ejemplo práctico en el puesto de Auxiliar del Estado.</p>
+            <h5 class="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-1">3. Regla mnemotécnica para memorizarlo</h5>
+            <div class="p-3 bg-zinc-50 border border-zinc-200 rounded text-xs text-zinc-700 italic">Regla nemotécnica limpia y fácil de recordar.</div>`;
+
+            try {
+                const response = await fetchGemini(userPrompt, systemPrompt);
+                contentArea.innerHTML = response.text;
+                playSensorySound(380, 'sine', 0.1);
+            } catch (error) {
+                contentArea.innerHTML = `
+                    <div class="p-4 bg-zinc-50 border border-zinc-200 text-zinc-700 rounded text-xs">
+                        No se ha podido contactar con el servicio de IA de Gemini. Verifica tu conexión de red o introduce una Clave API propia en la parte inferior izquierda.
+                    </div>
+                `;
+            }
+        }
+
+        function closeAIModal() {
+            document.getElementById('ai-modal').classList.add('hidden');
+        }
+
+        // --- 12. GENERACIÓN DE CONSEJO DEL DÍA ADAPTATIVO ---
+        async function generateAITip() {
+            const button = document.getElementById('btn-generate-tip');
+            const tipContent = document.getElementById('ai-tip-content');
+
+            button.disabled = true;
+            tipContent.innerHTML = "Generando truco de estudio adaptado...";
+
+            let currentWeekIndex = appState.semanas.findIndex(s => s.reales < s.estimadas);
+            if (currentWeekIndex === -1) currentWeekIndex = appState.semanas.length - 1;
+            const sActiva = appState.semanas[currentWeekIndex];
+
+            const systemPrompt = "Eres un mentor para un estudiante opositor con autismo. Tu estilo es estructurado, tranquilo, racional, lógico y directo.";
+            const userPrompt = `Danos un consejo de alta utilidad práctica para memorizar o avanzar en el tema de esta semana: "${sActiva.temas}" con los siguientes conceptos: "${sActiva.conceptos.join(', ')}". Escribe solo un párrafo corto (máximo 3 líneas) enfocado en la lógica del proceso.`;
+
+            try {
+                const response = await fetchGemini(userPrompt, systemPrompt);
+                tipContent.innerHTML = `"${response.text}"`;
+                playSensorySound(400, 'sine', 0.08);
+            } catch (error) {
+                tipContent.innerHTML = "No se pudo generar la recomendación. Revisa la Clave API.";
+            } finally {
+                button.disabled = false;
+            }
+        }
+
+        // --- STREAMING_CHUNK: Coding test evaluator and simulator logic... -->
+        // --- 13. GENERACIÓN DE PREGUNTAS TEST ESTRUCTURADAS ---
+        let activeQuestionAnswer = null;
+        let activeQuestionExplanation = "";
+
+        async function generateAITestQuestion() {
+            const button = document.getElementById('btn-generate-test');
+            const panel = document.getElementById('ai-test-panel');
+
+            button.disabled = true;
+            panel.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-8 space-y-2 bg-zinc-50 border border-zinc-200 rounded">
+                    <i class="fa-solid fa-circle-notch animate-spin text-zinc-500 text-lg"></i>
+                    <p class="text-[11px] font-bold text-zinc-500 uppercase tracking-wider animate-pulse">Redactando pregunta de nivel de examen oficial...</p>
+                </div>
+            `;
+
+            let currentWeekIndex = appState.semanas.findIndex(s => s.reales < s.estimadas);
+            if (currentWeekIndex === -1) currentWeekIndex = appState.semanas.length - 1;
+            const sActiva = appState.semanas[currentWeekIndex];
+
+            const schema = {
+                type: "OBJECT",
+                properties: {
+                    pregunta: { type: "STRING" },
+                    opciones: {
+                        type: "ARRAY",
+                        items: { type: "STRING" },
+                        description: "Exactamente 4 opciones, identificadas obligatoriamente como A), B), C), D)"
+                    },
+                    respuesta_correcta: { type: "STRING", description: "Letra exacta (A, B, C o D)" },
+                    justificacion: { type: "STRING", description: "Explicación directa de por qué es la correcta basándote en la ley" }
+                },
+                required: ["pregunta", "opciones", "respuesta_correcta", "justificacion"]
+            };
+
+            const systemPrompt = "Eres un examinador oficial de oposiciones en España. Generas preguntas tipo test rigurosas con 4 opciones. Tu lenguaje es exacto, técnico y formal.";
+            const userPrompt = `Redacta una pregunta test oficial del tema: "${sActiva.temas}" con los conceptos: "${sActiva.conceptos.join(', ')}".`;
+
+            try {
+                const response = await fetchGemini(userPrompt, systemPrompt, schema);
+                const qData = JSON.parse(response.text);
+
+                activeQuestionAnswer = qData.respuesta_correcta.trim().toUpperCase();
+                activeQuestionExplanation = qData.justificacion;
+
+                let optionsHTML = '';
+                qData.opciones.forEach((op, index) => {
+                    const letters = ['A', 'B', 'C', 'D'];
+                    const letter = letters[index];
+                    optionsHTML += `
+                        <button onclick="evaluateAnswer('${letter}', this)" class="w-full text-left p-3 rounded bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 hover:border-zinc-400 text-xs text-zinc-800 transition-all flex items-center justify-between gap-2">
+                            <span>${op}</span>
+                            <span class="text-[9px] text-zinc-400 font-bold uppercase select-none">OPCIÓN ${letter}</span>
+                        </button>
+                    `;
+                });
+
+                panel.innerHTML = `
+                    <div class="bg-white p-5 rounded border border-zinc-200 space-y-3">
+                        <div class="flex justify-between items-center flex-wrap gap-2">
+                            <span class="text-[9px] font-bold text-zinc-500 bg-zinc-100 px-2 py-0.5 rounded">Evaluación Semanal</span>
+                            <span class="text-[10px] text-zinc-400 font-medium">${sActiva.temas}</span>
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-zinc-900 leading-relaxed">${qData.pregunta}</h4>
+                        <div class="grid grid-cols-1 gap-1.5 pt-2" id="test-options-container">
+                            ${optionsHTML}
+                        </div>
+                        <div id="test-feedback-box" class="hidden p-3.5 rounded text-xs leading-relaxed transition-all">
+                            <!-- Respuesta de evaluación -->
+                        </div>
+                    </div>
+                `;
+                playSensorySound(300, 'sine', 0.1);
+
+            } catch (error) {
+                panel.innerHTML = `
+                    <div class="p-4 bg-zinc-50 border border-zinc-200 text-zinc-600 text-xs">
+                        No se ha podido generar la pregunta de prueba. Verifica tu clave de Gemini API en la barra lateral.
+                    </div>
+                `;
+            } finally {
+                button.disabled = false;
+            }
+        }
+
+        function evaluateAnswer(selectedLetter, element) {
+            const container = document.getElementById('test-options-container');
+            const feedbackBox = document.getElementById('test-feedback-box');
+            
+            const buttons = container.getElementsByTagName('button');
+            for (let btn of buttons) {
+                btn.disabled = true;
+                btn.classList.add('opacity-70');
+            }
+
+            const correct = (selectedLetter === activeQuestionAnswer);
+
+            if (correct) {
+                element.className = "w-full text-left p-3 rounded bg-emerald-50 border border-emerald-500 text-xs font-bold text-emerald-800 flex items-center justify-between gap-2 opacity-100";
+                feedbackBox.className = "p-4 rounded bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs space-y-1";
+                feedbackBox.innerHTML = `
+                    <h5 class="font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Respuesta Correcta (+1.00)</h5>
+                    <p class="text-zinc-700 font-medium">${activeQuestionExplanation}</p>
+                `;
+                playSensorySound(440, 'sine', 0.1);
+            } else {
+                element.className = "w-full text-left p-3 rounded bg-red-50 border border-red-500 text-xs font-bold text-red-800 flex items-center justify-between gap-2 opacity-100";
+                
+                for (let btn of buttons) {
+                    if (btn.innerText.includes(`OPCIÓN ${activeQuestionAnswer}`)) {
+                        btn.className = "w-full text-left p-3 rounded bg-emerald-50 border border-emerald-500 text-xs font-bold text-emerald-800 flex items-center justify-between gap-2 opacity-100";
+                    }
+                }
+
+                feedbackBox.className = "p-4 rounded bg-red-50 border border-red-200 text-red-800 text-xs space-y-1";
+                feedbackBox.innerHTML = `
+                    <h5 class="font-bold flex items-center gap-1"><i class="fa-solid fa-circle-xmark"></i> Respuesta Incorrecta (-0.33)</h5>
+                    <p class="text-zinc-700 font-medium">${activeQuestionExplanation}</p>
+                `;
+                playSensorySound(220, 'sine', 0.25);
+            }
+
+            feedbackBox.classList.remove('hidden');
+        }
+
+        // --- STREAMING_CHUNK: Formatting chat interface and search queries... -->
+        // --- 14. CHATBOT CONSULTOR CON GROUNDING DE GOOGLE ---
+        function renderChatHistory() {
+            const container = document.getElementById('chat-messages');
+            container.innerHTML = '';
+
+            appState.chatHistory.forEach(msg => {
+                const isModel = msg.role === 'model';
+                const avatar = isModel ? '🤖 Consultor Opos-IA' : '👤 Mi Consulta';
+                const bgClass = isModel ? 'bg-zinc-50 border border-zinc-200' : 'bg-zinc-100 border border-zinc-300 ml-6';
+                const textClass = 'text-zinc-800';
+
+                let sourcesHTML = '';
+                if (msg.sources && msg.sources.length > 0) {
+                    sourcesHTML = `<div class="mt-2 pt-2 border-t border-zinc-200">
+                        <p class="text-[9px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Fuentes Oficiales Consultadas:</p>
+                        <div class="flex flex-wrap gap-1">`;
+                    msg.sources.forEach(src => {
+                        sourcesHTML += `
+                            <a href="${src.uri}" target="_blank" class="text-[10px] text-zinc-600 hover:text-zinc-950 bg-white border border-zinc-200 px-2 py-0.5 rounded flex items-center gap-1 transition-all">
+                                <i class="fa-solid fa-link text-[8px]"></i> ${src.title}
+                            </a>
+                        `;
+                    });
+                    sourcesHTML += `</div></div>`;
+                }
+
+                container.innerHTML += `
+                    <div class="${bgClass} p-3 rounded">
+                        <p class="font-bold text-[9px] uppercase tracking-wider mb-1 ${isModel ? 'text-zinc-500' : 'text-zinc-600'}">${avatar}:</p>
+                        <p class="${textClass} leading-relaxed whitespace-pre-line text-xs">${msg.text}</p>
+                        ${sourcesHTML}
+                    </div>
+                `;
+            });
+
+            container.scrollTop = container.scrollHeight;
+        }
+
+        async function sendMessage(e) {
+            if (e) e.preventDefault();
+            const input = document.getElementById('chat-input');
+            const query = input.value.trim();
+            if (!query) return;
+
+            input.value = '';
+            const sendButton = document.getElementById('btn-chat-send');
+            const sendIcon = document.getElementById('chat-send-icon');
+            sendButton.disabled = true;
+            sendIcon.className = "fa-solid fa-circle-notch animate-spin";
+
+            appState.chatHistory.push({ role: 'user', text: query });
+            renderChatHistory();
+
+            const systemPrompt = `Eres un consultor experto en empleo público del Estado y de la Comunidad de Madrid. Ofreces asesoramiento exacto, estructurado y sin rodeos líricos a un opositor que valora el orden, la precisión y la sencillez en la exposición de datos.`;
+
+            // Loader temporal en pantalla de chat
+            const chatMessagesContainer = document.getElementById('chat-messages');
+            const tempLoader = document.createElement('div');
+            tempLoader.className = "bg-zinc-50 p-3 rounded border border-zinc-200 animate-pulse";
+            tempLoader.id = "temp-loader";
+            tempLoader.innerHTML = `
+                <p class="font-bold text-[9px] text-zinc-400 uppercase">Consultor Opos-IA está redactando...</p>
+                <div class="h-1.5 bg-zinc-200 rounded w-1/3 mt-1.5"></div>
+            `;
+            chatMessagesContainer.appendChild(tempLoader);
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+
+            try {
+                // Habilitar grounding automático si se mencionan palabras de búsqueda
+                const needsSearch = query.toLowerCase().includes('buscar') || query.toLowerCase().includes('plaza') || query.toLowerCase().includes('convocatoria') || query.toLowerCase().includes('boe') || query.toLowerCase().includes('bocm') || query.toLowerCase().includes('inap') || query.toLowerCase().includes('tasas');
+                
+                const response = await fetchGemini(query, systemPrompt, null, needsSearch);
+                
+                const loader = document.getElementById('temp-loader');
+                if (loader) loader.remove();
+
+                appState.chatHistory.push({
+                    role: 'model',
+                    text: response.text,
+                    sources: response.sources
+                });
+
+                playSensorySound(380, 'sine', 0.08);
+                saveState();
+                renderChatHistory();
+
+            } catch (error) {
+                const loader = document.getElementById('temp-loader');
+                if (loader) loader.remove();
+
+                appState.chatHistory.push({
+                    role: 'model',
+                    text: "Error de comunicación con el motor de IA. Introduce una API Key propia en la barra lateral para continuar sin limitaciones."
+                });
+                renderChatHistory();
+            } finally {
+                sendButton.disabled = false;
+                sendIcon.className = "fa-solid fa-paper-plane";
+            }
+        }
+
+        function clearChat() {
+            appState.chatHistory = [
+                { role: "model", text: "Hola. Soy tu consultor inteligente para la oposición Auxiliar (C2) y Administrativo (C1) en Madrid. Puedo aclararte dudas jurídicas o buscar convocatorias vigentes usando Google Search." }
+            ];
+            saveState();
+            renderChatHistory();
+        }
+
+        // --- 15. MANEJO DE OBJETIVOS DIARIOS (TO-DO LIST) ---
+        function renderTodos() {
+            const list = document.getElementById('todo-list');
+            list.innerHTML = '';
+
+            if (appState.todos.length === 0) {
+                list.innerHTML = `<p class="text-xs text-zinc-400 text-center py-4 italic">No tienes tareas para hoy.</p>`;
+                return;
+            }
+
+            appState.todos.forEach(todo => {
+                list.innerHTML += `
+                    <div class="flex items-center justify-between p-2 rounded bg-white border border-zinc-200 hover:border-zinc-300 transition-all">
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" ${todo.done ? 'checked' : ''} onchange="toggleTodo(${todo.id})" class="rounded border-zinc-300 text-zinc-800 focus:ring-zinc-500">
+                            <span class="text-xs text-zinc-700 ${todo.done ? 'line-through text-zinc-400' : ''}">${todo.text}</span>
+                        </div>
+                        <button onclick="deleteTodo(${todo.id})" class="text-zinc-400 hover:text-red-600 px-2 py-1" title="Eliminar">
+                            <i class="fa-solid fa-trash-can text-xs"></i>
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function addTodo(e) {
+            e.preventDefault();
+            const input = document.getElementById('todo-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const newTodo = {
+                id: Date.now(),
+                text: text,
+                done: false
+            };
+
+            appState.todos.push(newTodo);
+            input.value = '';
+            saveState();
+            renderTodos();
+            playSensorySound(415, 'sine', 0.05);
+        }
+
+        function toggleTodo(id) {
+            const index = appState.todos.findIndex(t => t.id === id);
+            if (index !== -1) {
+                appState.todos[index].done = !appState.todos[index].done;
+                saveState();
+                renderTodos();
+                playSensorySound(466, 'sine', 0.04);
+            }
+        }
+
+        function deleteTodo(id) {
+            appState.todos = appState.todos.filter(t => t.id !== id);
+            saveState();
+            renderTodos();
+        }
+
+        // --- 16. CRONÓMETRO DE ESTUDIO Y POMODORO ---
+        let timerInterval = null;
+        let timerTimeLeft = 5400; 
+        let timerRunning = false;
+        let timerMode = 'SIMULACRO_EXAMEN';
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timerTimeLeft / 60);
+            const secs = timerTimeLeft % 60;
+            document.getElementById('timer-display').innerText = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function toggleTimer() {
+            const playIcon = document.getElementById('timer-play-icon');
+            const playText = document.getElementById('timer-play-text');
+            
+            if (timerRunning) {
+                clearInterval(timerInterval);
+                timerRunning = false;
+                playIcon.className = "fa-solid fa-play";
+                playText.innerText = "Iniciar";
+                playSensorySound(300, 'sine', 0.1);
+            } else {
+                timerRunning = true;
+                playIcon.className = "fa-solid fa-pause";
+                playText.innerText = "Pausar";
+                playSensorySound(350, 'sine', 0.1);
+                
+                timerInterval = setInterval(() => {
+                    if (timerTimeLeft > 0) {
+                        timerTimeLeft--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        timerRunning = false;
+                        playIcon.className = "fa-solid fa-play";
+                        playText.innerText = "Iniciar";
+                        playSensorySound(330, 'sine', 0.8);
+                        showCustomAlert("Simulacro Finalizado", `El tiempo de tu sesión de ${timerMode.replace('_', ' ')} ha terminado.`, "WARN");
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            document.getElementById('timer-play-icon').className = "fa-solid fa-play";
+            document.getElementById('timer-play-text').innerText = "Iniciar";
+            
+            if (timerMode === 'SIMULACRO_EXAMEN') timerTimeLeft = 5400;
+            else if (timerMode === 'POMODORO') timerTimeLeft = 1500;
+            else if (timerMode === 'CONCENTRACION') timerTimeLeft = 3000;
+            else timerTimeLeft = 5400;
+
+            updateTimerDisplay();
+        }
+
+        function setTimerPreset(minutes, mode) {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            document.getElementById('timer-play-icon').className = "fa-solid fa-play";
+            document.getElementById('timer-play-text').innerText = "Iniciar";
+            
+            timerTimeLeft = minutes * 60;
+            timerMode = mode;
+            document.getElementById('timer-mode-label').innerText = mode.replace('_', ' ');
+            updateTimerDisplay();
+            playSensorySound(380, 'sine', 0.1);
+        }
+
+        // --- 17. BITÁCORA E HISTÓRICO DE EXÁMENES ---
+        function renderExamResults() {
+            const list = document.getElementById('exam-results-list');
+            list.innerHTML = '';
+
+            if (appState.examResults.length === 0) {
+                list.innerHTML = `<p class="text-[11px] text-zinc-400 italic text-center py-2">Sin exámenes registrados.</p>`;
+                return;
+            }
+
+            appState.examResults.forEach(ex => {
+                list.innerHTML += `
+                    <div class="p-2 rounded bg-zinc-50 border border-zinc-200 flex justify-between items-center text-xs">
+                        <div>
+                            <span class="text-[9px] text-zinc-400 block">${ex.date}</span>
+                            <span class="font-bold text-zinc-800">${ex.name}</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-bold text-zinc-900">${ex.nota.toFixed(2)} pts</span>
+                            <p class="text-[9px] text-zinc-400">${ex.ok}A - ${ex.fail}F</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function addExamResult(e) {
+            e.preventDefault();
+            const name = document.getElementById('exam-name').value.trim();
+            const correct = parseInt(document.getElementById('exam-correct').value);
+            const wrong = parseInt(document.getElementById('exam-wrong').value);
+
+            if (!name || isNaN(correct) || isNaN(wrong)) return;
+
+            const nota = correct - (wrong * 0.33);
+
+            const result = {
+                id: Date.now(),
+                name: name,
+                ok: correct,
+                fail: wrong,
+                nota: Math.max(0, nota),
+                date: new Date().toLocaleDateString('es-ES')
+            };
+
+            appState.examResults.unshift(result);
+            document.getElementById('exam-name').value = '';
+            document.getElementById('exam-correct').value = '';
+            document.getElementById('exam-wrong').value = '';
+
+            saveState();
+            renderExamResults();
+            playSensorySound(300, 'sine', 0.15);
+        }
+
+        // --- 18. UTILIDADES DE COPIADO ---
+        function copyMasterPrompt() {
+            const textToCopy = document.getElementById('prompt-box');
+            textToCopy.select();
+            textToCopy.setSelectionRange(0, 99999);
+
+            try {
+                const success = document.execCommand('copy');
+                if (success) {
+                    const toast = document.getElementById('copy-toast');
+                    toast.classList.remove('hidden');
+                    playSensorySound(440, 'sine', 0.15);
+                    setTimeout(() => {
+                        toast.classList.add('hidden');
+                    }, 2000);
+                }
+            } catch (err) {
+                console.error("Error al copiar texto", err);
+            }
+        }
+
+        // --- 19. INICIALIZACIÓN DE LA APLICACIÓN ---
+        window.onload = function() {
+            // Cargar API Key si ya está en storage
+            if (appState.apiKey) {
+                document.getElementById('api-key-input').value = appState.apiKey;
+            }
+
+            // Aplicar configuraciones sensoriales guardadas
+            document.getElementById('sensory-sound-mute').checked = appState.sensorySoundMute;
+            document.getElementById('sensory-focus-mode').checked = appState.sensoryFocusMode;
+            document.getElementById('sensory-large-text').checked = appState.sensoryLargeText;
+
+            // Disparar las clases iniciales
+            toggleFocusMode();
+            toggleLargeText();
+
+            // Renderizar todo
+            recalculateMetrics();
+            renderTodos();
+            renderExamResults();
+            renderChatHistory();
+
+            // Configurar el día de la semana actual
+            const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+            const hoy = new Date();
+            document.getElementById('current-day-badge').innerText = diasSemana[hoy.getDay()];
+
+            // Estado del check de viernes
+            const ind = document.getElementById('indicador-viernes');
+            document.getElementById('check-viernes').checked = appState.esViernes;
+            if (appState.esViernes) {
+                ind.className = "h-3 w-3 rounded-full bg-red-600";
+            } else {
+                ind.className = "h-3 w-3 rounded-full bg-zinc-300";
+            }
+        }
+    </script>
+</body>
+</html>
